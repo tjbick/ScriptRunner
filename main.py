@@ -2,7 +2,7 @@
 from folder import Folder
 import curses
 import time
-from util import option_loop
+from ScriptRunner.ui.util import option_loop
 
 def main(stdscr):
     curses.curs_set(False)

@@ -11,16 +11,7 @@ def debug(stdscr, output):
 def _print_options(stdscr, options, index):
     stdscr.clear()
     h, w = stdscr.getmaxyx()
-    # display_y = 0
-    # display_x = 0
-    # while index > h:
-    #     display_y += h//2
-    # while 0:       ## TODO: Not sure how to account for if something wants to run off the side of the screen.
-    #     display_x += w//2
     
-    # title_x = w//2 - len(self._dir)//2
-    # stdscr.addstr(0, title_x, self._dir)
-
     y = -1
     # debug(stdscr, str(y))
     for idx, row in enumerate(options):

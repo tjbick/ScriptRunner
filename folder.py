@@ -2,7 +2,7 @@ import time
 import curses
 import subprocess
 import os
-from util import debug, option_loop
+from ScriptRunner.ui.util import debug, option_loop
 from bash_script import Bash_Script
 
 # TODO: THINKING ABOUT HOW TO MAKE THE SCRIPT MENU AND FOLDER MENU TO BE ABLE TO USE THE SAME FUNCTION - maybe try doing enumerations - maybe change the last option from auto
@@ -13,6 +13,7 @@ class Folder:
         self._dir = dir + "/"
         self._inner_folders = []
         self._bash_scripts = []
+
         self._get_contents()
         self.hight, self.width = stdscr.getmaxyx()
         if self.hight < len(self._inner_folders) + len(self._bash_scripts):
@@ -20,8 +21,6 @@ class Folder:
         
         self._stdscr = curses.newpad(self.hight, self.width)
         self._stdscr.keypad(1)
-        # debug(stdscr, str(self._inner_folders))
-        # debug(stdscr, str(self._bash_scripts))
         
     def _get_contents(self):
         if not os.path.isdir(self._dir):
@@ -29,7 +28,7 @@ class Folder:
             return -1
         try:
             folder_contents = subprocess.run(['ls', self._dir], stdout=subprocess.PIPE).stdout.decode('utf-8')
-            self._all_contents = folder_contents.split()
+            self._all_contents = folder_contents.split('\n')
 
             for item in self._all_contents:
                 if os.path.isdir(self._dir + item):
